@@ -14,16 +14,13 @@ declare class TransactionManager {
 
     loadSubjectsFromFile(fileLocation: string): Promise<void>;
     registerSubject(name: TransactionManager.Subject, actions: TransactionManager.Actions): this;
-    open(action: string, subject: TransactionManager.Subject, data: any[]): string;
+    open(action: TransactionManager.Action, subject: TransactionManager.Subject, data: any[]): string;
     attachData(transactId: string, data: any): boolean;
     close(transactId: string): boolean;
     exit(): void;
 }
 
 declare namespace TransactionManager {
-    type Database = sqlite.Database;
-    type Subject = string | symbol;
-
     interface ConstructorOptions {
         interval?: number;
         verbose?: boolean;
@@ -43,6 +40,10 @@ declare namespace TransactionManager {
         attachData?: any;
         data: any[];
     }
+
+    type Database = sqlite.Database;
+    type Subject = string | symbol;
+    type Action = keyof Actions;
 }
 
 export as namespace TransactionManager;
