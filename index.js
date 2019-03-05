@@ -252,10 +252,8 @@ class TransactManager extends EventEmitter {
      * @returns {void}
      */
     exit() {
-        if (typeof this.timer === "number") {
-            timer.clearInterval(this.timer);
-            this.timer = undefined;
-        }
+        timer.clearInterval(this.timer);
+        this.timer = undefined;
     }
 }
 
