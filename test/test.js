@@ -49,4 +49,28 @@ test.group("SQLite-transaction", (group) => {
 
         tM.exit();
     });
+
+    test("registerSubject must throw TypeError if name is not a string or a symbol", (assert) => {
+        const tM = new TransactionManager(db);
+        try {
+            tM.registerSubject(10);
+        }
+        catch (err) {
+            assert.equal(err.message, "name should be typeof string or symbol");
+        }
+        tM.exit();
+    });
+
+    test("registerSubject must work as expected", (assert) => {
+        const tM = new TransactionManager(db);
+        const ret = tM.registerSubject("foo", "bar");
+        assert.equal(ret === tM, true);
+        assert.equal(tM.subjects.size, 1);
+        assert.equal(tM.subjects.has("foo"), true);
+        assert.equal(tM.subjects.get("foo"), "bar");
+        tM.registerSubject("foo", "xd");
+        assert.equal(tM.subjects.get("foo"), "bar");
+
+        tM.exit();
+    });
 });
