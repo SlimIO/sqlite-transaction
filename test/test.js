@@ -1,6 +1,6 @@
 // Require Node.js Dependencies
 const { join } = require("path");
-const { unlink } = require("fs").promises;
+const { unlink, readFile } = require("fs").promises;
 
 // Require Third-party Dependencies
 const test = require("japa");
@@ -18,7 +18,9 @@ test.group("SQLite-transaction", (group) => {
     let db;
 
     group.before(async() => {
+        const sql = await readFile(join(__dirname, "db.sql"), { encoding: "utf8" });
         db = await sqlite.open(DB);
+        await db.exec(sql);
     });
 
     group.after(async() => {
