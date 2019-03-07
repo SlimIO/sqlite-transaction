@@ -194,4 +194,36 @@ test.group("SQLite-transaction", (group) => {
 
         tM.exit();
     });
+
+    test("attachData(transactId) must return false if the tId doesn't exist!", async(assert) => {
+        const tM = new TransactionManager(db);
+        const ret = tM.attachData("test");
+        assert.equal(ret, false);
+
+        tM.exit();
+    });
+
+    test("attachData to a transaction", async(assert) => {
+        assert.plan(4);
+        const tM = new TransactionManager(db, {
+            interval: 500,
+            verbose: true
+        });
+        tM.registerSubject("user", {
+            insert: "INSERT INTO users (username, password) VALUES (?, ?)"
+        });
+
+        tM.once("user.insert", (openAt, data, aData) => {
+            assert.equal(typeof openAt, "number");
+            assert.deepEqual(data, ["fraxken", "admin"]);
+            assert.equal(aData.foo, "bar");
+        });
+
+        const tId = tM.open("insert", "user", ["fraxken", "admin"]);
+        const ret = tM.attachData(tId, { foo: "bar" });
+        assert.equal(ret, true);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        tM.exit();
+    });
 });
