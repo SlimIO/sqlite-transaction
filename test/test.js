@@ -146,4 +146,31 @@ test.group("SQLite-transaction", (group) => {
 
         tM.exit();
     });
+
+    test("open a transaction to insert a new User", async(assert) => {
+        assert.plan(6);
+        const tM = new TransactionManager(db, {
+            interval: 500
+        });
+        tM.registerSubject("user", {
+            insert: "INSERT INTO users (username, password) VALUES (?, ?)"
+        });
+
+        tM.once("user.insert", () => {
+            assert.equal(1, 1);
+        });
+
+        const tId = tM.open("insert", "user", ["fraxken", "admin"]);
+        assert.equal(typeof tId, "string");
+        assert.equal(tM.transactions.has(tId), true);
+        assert.equal(tM.size, 1);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        const row = await db.get("SELECT * FROM users WHERE username=?", "fraxken");
+        assert.equal(row.id, 1);
+        assert.equal(row.password, "admin");
+        await db.run("DELETE FROM users WHERE id=?", row.id);
+
+        tM.exit();
+    });
 });
