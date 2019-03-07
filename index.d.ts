@@ -3,7 +3,7 @@
 
 import * as sqlite from "sqlite";
 
-declare class TransactionManager {
+declare class TransactionManager<S> {
     constructor(db: sqlite.Database, options?: TransactionManager.ConstructorOptions)
 
     public verbose: boolean;
@@ -14,7 +14,7 @@ declare class TransactionManager {
 
     loadSubjectsFromFile(fileLocation: string): Promise<void>;
     registerSubject(name: TransactionManager.Subject, actions: TransactionManager.Actions): this;
-    open(action: TransactionManager.Action, subject: TransactionManager.Subject, data: any[]): string;
+    open(action: TransactionManager.Action, subject: keyof S, data: any[]): string;
     attachData(transactId: string, data: any): boolean;
     close(transactId: string): boolean;
     exit(): void;
