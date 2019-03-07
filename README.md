@@ -19,7 +19,23 @@ $ yarn add @slimio/sqlite-transaction
 ```
 
 ## Usage example
-TBC
+Take the following example with an SQLite DB (with a table `users`).
+```js
+const tM = new TransactionManager(db, {
+    interval: 500,
+    verbose: true
+});
+tM.registerSubject("user", {
+    insert: "INSERT INTO users (username, password) VALUES (?, ?)"
+});
+
+tM.once("user.insert", (openAt, data, aData) => {
+    console.log(`User insertion requested at: ${new Date(openAt)}, now successfully inserted!`);
+});
+
+const tId = tM.open("insert", "user", ["fraxken", "admin"]);
+const ret = tM.attachData(tId, { foo: "bar" });
+```
 
 ## API
 TBC
