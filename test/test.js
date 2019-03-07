@@ -109,4 +109,41 @@ test.group("SQLite-transaction", (group) => {
 
         tM.exit();
     });
+
+    test("open() - unknown Action must throw Error", async(assert) => {
+        const tM = new TransactionManager(db);
+        try {
+            tM.open("yahou");
+        }
+        catch (err) {
+            assert.equal(err.message, "Unknown action yahou");
+        }
+
+        tM.exit();
+    });
+
+    test("open() - subject must Exist", async(assert) => {
+        const tM = new TransactionManager(db);
+        try {
+            tM.open("insert", "bouh!");
+        }
+        catch (err) {
+            assert.equal(err.message, "Unknown subject with name bouh!");
+        }
+
+        tM.exit();
+    });
+
+    test("open() - action must exist on the requested subject", async(assert) => {
+        const tM = new TransactionManager(db);
+        tM.registerSubject("test", { insert: "..." });
+        try {
+            tM.open("update", "test");
+        }
+        catch (err) {
+            assert.equal(err.message, "Action with name update is not defined on subject test");
+        }
+
+        tM.exit();
+    });
 });
