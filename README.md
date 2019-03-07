@@ -60,5 +60,50 @@ const tM = new transactionManager(db, { interval: 1000 });
 ```
 </details>
 
+<details><summary>registerSubject(name: TransactionManager.Subject, actions: TransactionManager.Actions): this</summary>
+<br />
+
+Register a new Subject on the Transaction Manager object. The subject name must be typeof string or symbol. The actions argument must be described by a JavaScript Object as follow:
+```ts
+interface Actions {
+    insert?: string;
+    delete?: string;
+    update?: string;
+}
+```
+
+```js
+tM.registerSubject("test", {
+    update: "...",
+    delete: "..."
+});
+```
+</details>
+
+<details><summary>loadSubjectsFromFile(fileLocation: string): Promise< void ></summary>
+<br />
+
+</details>
+
+<details><summary>open(action: TransactionManager.Action, subject: keyof S, data: any[]): string</summary>
+<br />
+
+</details>
+
+<details><summary>attachData(transactId: string, data: any): boolean</summary>
+<br />
+
+</details>
+
+<details><summary>close(transactId: string): boolean</summary>
+<br />
+
+</details>
+
+<details><summary>exit(): void</summary>
+<br />
+
+</details>
+
 ## License
 MIT
