@@ -73,4 +73,40 @@ test.group("SQLite-transaction", (group) => {
 
         tM.exit();
     });
+
+    test("loadSubjectsFromFile, fileLocation must be a string", async(assert) => {
+        const tM = new TransactionManager(db);
+        try {
+            await tM.loadSubjectsFromFile(null);
+        }
+        catch (err) {
+            assert.equal(err.message, "fileLocation should be typeof string!");
+        }
+
+        tM.exit();
+    });
+
+    test("loadSubjectsFromFile, fileLocation extension must be .json", async(assert) => {
+        const tM = new TransactionManager(db);
+        try {
+            await tM.loadSubjectsFromFile("./local.txt");
+        }
+        catch (err) {
+            assert.equal(err.message, "Only JSON file are supported!");
+        }
+
+        tM.exit();
+    });
+
+    test("loadSubjectsFromFile must work as expected", async(assert) => {
+        const tM = new TransactionManager(db);
+        const ret = await tM.loadSubjectsFromFile(join(__dirname, "req.json"));
+        assert.equal(ret, void 0);
+        assert.equal(tM.subjects.has("sub1"), true);
+        assert.equal(tM.subjects.has("sub2"), true);
+        const action = tM.subjects.get("sub1");
+        assert.equal(action.insert, "...");
+
+        tM.exit();
+    });
 });
