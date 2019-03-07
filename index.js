@@ -237,9 +237,6 @@ class TransactManager extends EventEmitter {
         }
 
         const { index } = this.transactions.get(transactId);
-        if (transactId !== this[TRANSACT][index]) {
-            throw new Error("Invalid transactionId index!");
-        }
         this[TRANSACT].splice(index, 1);
 
         return true;

@@ -173,4 +173,25 @@ test.group("SQLite-transaction", (group) => {
 
         tM.exit();
     });
+
+    test("close(transactId) must return false if the tId doesn't exist!", async(assert) => {
+        const tM = new TransactionManager(db);
+        const ret = tM.close("test");
+        assert.equal(ret, false);
+
+        tM.exit();
+    });
+
+    test("close opened transaction", async(assert) => {
+        const tM = new TransactionManager(db);
+        tM.registerSubject("user", {
+            insert: "INSERT INTO users (username, password) VALUES (?, ?)"
+        });
+
+        const tId = tM.open("insert", "user", ["fraxken", "admin"]);
+        const ret = tM.close(tId);
+        assert.equal(ret, true);
+
+        tM.exit();
+    });
 });
