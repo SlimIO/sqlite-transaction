@@ -3,7 +3,7 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/SlimIO/is/commit-activity)
 ![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)
 
-SQLite transaction manager for SlimIO events addon
+SQLite transaction manager for SlimIO events addon. Designed to work with the [sqlite](https://github.com/kriasoft/node-sqlite#readme) npm package.
 
 ## Requirements
 - Node.js v10 or higher
@@ -38,7 +38,27 @@ const ret = tM.attachData(tId, { foo: "bar" });
 ```
 
 ## API
-TBC
+<details><summary>constructor(db: sqlite.Database, options?: TransactionManager.ConstructorOptions)</summary>
+<br />
+
+Create a new SQLite transaction manager. The first argument must be an SQLite db (from the npm package [sqlite](https://github.com/kriasoft/node-sqlite#readme)). Available options are described by the following interface:
+```ts
+interface ConstructorOptions {
+    interval?: number;
+    verbose?: boolean;
+}
+```
+
+Default values are interval `5000` (milliseconds) and verbose `false`.
+
+```js
+const sqlite = require("sqlite");
+const transactionManager = require("@slimio/sqlite-transaction");
+
+const db = await sqlite.open("./db.sqlite");
+const tM = new transactionManager(db, { interval: 1000 });
+```
+</details>
 
 ## License
 MIT
