@@ -7,6 +7,11 @@ const test = require("japa");
 const sqlite = require("sqlite");
 const is = require("@slimio/is");
 
+/**
+ * @typedef {Object} SQLDef
+ * @property {[string, string]} user
+ */
+
 // Require Internal
 const TransactionManager = require("../");
 
@@ -149,6 +154,8 @@ test.group("SQLite-transaction", (group) => {
 
     test("open a transaction to insert a new User", async(assert) => {
         assert.plan(6);
+
+        /** @type {TransactionManager<SQLDef>} */
         const tM = new TransactionManager(db, {
             interval: 500
         });
@@ -183,6 +190,7 @@ test.group("SQLite-transaction", (group) => {
     });
 
     test("close opened transaction", async(assert) => {
+        /** @type {TransactionManager<SQLDef>} */
         const tM = new TransactionManager(db);
         tM.registerSubject("user", {
             insert: "INSERT INTO users (username, password) VALUES (?, ?)"
@@ -205,6 +213,7 @@ test.group("SQLite-transaction", (group) => {
 
     test("attachData to a transaction", async(assert) => {
         assert.plan(4);
+        /** @type {TransactionManager<SQLDef>} */
         const tM = new TransactionManager(db, {
             interval: 500,
             verbose: true

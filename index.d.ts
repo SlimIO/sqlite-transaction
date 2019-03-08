@@ -14,7 +14,7 @@ declare class TransactionManager<S> {
 
     loadSubjectsFromFile(fileLocation: string): Promise<void>;
     registerSubject(name: TransactionManager.Subject, actions: TransactionManager.Actions): this;
-    open(action: TransactionManager.Action, subject: keyof S, data: any[]): string;
+    open<T extends keyof S>(action: TransactionManager.Action, subject: T, data: S[T]): string;
     attachData(transactId: string, data: any): boolean;
     close(transactId: string): boolean;
     exit(): void;
