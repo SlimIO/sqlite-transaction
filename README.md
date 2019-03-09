@@ -102,6 +102,9 @@ await tM.loadSubjectsFromFile("./subjects.json");
 <details><summary>open(action: TransactionManager.Action, subject: keyof S, data: any[]): string</summary>
 <br />
 
+Open a new request that will be queue and handled in a SQLite transaction. **action** and **subject** arguments are not mandatory and must be valid. Action must be either **insert**, **update** or **delete**.
+
+The action must exist on the given subject.
 </details>
 
 <details><summary>attachData(transactId: string, data: any): boolean</summary>
