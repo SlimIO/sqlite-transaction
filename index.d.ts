@@ -1,9 +1,10 @@
 /// <reference types="@types/node" />
 /// <reference types="sqlite" />
 
+import * as events from "events";
 import * as sqlite from "sqlite";
 
-declare class TransactionManager<S> {
+declare class TransactionManager<S> extends events {
     constructor(db: sqlite.Database, options?: TransactionManager.ConstructorOptions)
 
     public verbose: boolean;
