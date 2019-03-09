@@ -38,7 +38,7 @@ const ret = tM.attachData(tId, { foo: "bar" });
 ```
 
 ## API
-<details><summary>constructor(db: sqlite.Database, options?: TransactionManager.ConstructorOptions)</summary>
+<details><summary>constructor< S >(db: sqlite.Database, options?: TransactionManager.ConstructorOptions)</summary>
 <br />
 
 Create a new SQLite transaction manager. The first argument must be an SQLite db (from the npm package [sqlite](https://github.com/kriasoft/node-sqlite#readme)). Available options are described by the following interface:
@@ -83,6 +83,20 @@ tM.registerSubject("test", {
 <details><summary>loadSubjectsFromFile(fileLocation: string): Promise< void ></summary>
 <br />
 
+Load subjects from a given **.json** file. The file must be indented as follow:
+```json
+{
+    "subjectName": {
+        "insert": "INSERT INTO table (field) VALUES ('val')",
+        "update": "..."
+    }
+}
+```
+
+Example
+```js
+await tM.loadSubjectsFromFile("./subjects.json");
+```
 </details>
 
 <details><summary>open(action: TransactionManager.Action, subject: keyof S, data: any[]): string</summary>
@@ -104,6 +118,10 @@ tM.registerSubject("test", {
 <br />
 
 </details>
+
+## Roadmap
+- Ability to lock/unlock requests (db handle priority).
+- Reduce/Agregate same requests (alarm with row occurence for example).
 
 ## License
 MIT
