@@ -2,9 +2,9 @@
 const { EventEmitter } = require("events");
 const { readFile } = require("fs").promises;
 const { extname } = require("path");
+const { randomBytes } = require("crypto");
 
 // Require Third-party Dependencies
-const uuid = require("uuid/v4");
 const timer = require("@slimio/timer");
 
 // CONSTANTS
@@ -185,7 +185,7 @@ class TransactManager extends EventEmitter {
         }
 
         // Generate transactId
-        const transactId = uuid();
+        const transactId = randomBytes(16).toString();
         const openAt = Date.now();
         if (this.verbose) {
             console.log(`Open new transaction (${subject}.${action}) with uid ${transactId}`);
