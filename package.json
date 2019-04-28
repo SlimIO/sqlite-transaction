@@ -14,7 +14,13 @@
         "type": "git",
         "url": "git+https://github.com/SlimIO/sqlite-transaction.git"
     },
-    "keywords": [],
+    "keywords": [
+        "SlimIO",
+        "sqlite",
+        "transaction",
+        "manager",
+        "handler"
+    ],
     "author": "SlimIO",
     "license": "MIT",
     "bugs": {
