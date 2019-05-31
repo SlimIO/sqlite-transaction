@@ -126,5 +126,11 @@ The action must exist on the given subject.
 - Ability to lock/unlock requests (db handle priority).
 - Reduce/Agregate same requests (alarm with row occurence for example).
 
+## Dependencies
+
+|Name|Refactoring|Security Risk|Usage|
+|---|---|---|---|
+|[@slimio/timer](https://github.com/SlimIO/Timer)|Minor|Low|Driftless Timer|
+
 ## License
 MIT
