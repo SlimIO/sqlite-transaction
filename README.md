@@ -1,7 +1,10 @@
 # sqlite-transaction
-![version](https://img.shields.io/badge/version-0.1.0-blue.svg)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/SlimIO/is/commit-activity)
+![Version](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/SlimIO/sqlite-transaction/master/package.json?token=Aeue0P3eryCYRikk9tHZScyXOpqtMvFIks5ca-XwwA%3D%3D&query=$.version&label=Version)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/SlimIO/sqlite-transaction/commit-activity)
 ![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)
+![dep](https://img.shields.io/david/SlimIO/sqlite-transaction.svg)
+![size](https://img.shields.io/github/repo-size/SlimIO/sqlite-transaction.svg)
+[![Known Vulnerabilities](https://snyk.io/test/github/SlimIO/sqlite-transaction/badge.svg?targetFile=package.json)](https://snyk.io/test/github/SlimIO/sqlite-transaction?targetFile=package.json)
 
 SQLite transaction manager for SlimIO events addon. Designed to work with the [sqlite](https://github.com/kriasoft/node-sqlite#readme) npm package.
 
