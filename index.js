@@ -1,3 +1,5 @@
+"use strict";
+
 // Require Node.js dependencies
 const { EventEmitter } = require("events");
 const { readFile } = require("fs").promises;
@@ -12,51 +14,51 @@ const DEFAULT_INTERVAL_MS = 5000;
 const ACTIONS = new Set(["insert", "update", "delete"]);
 const TRANSACT = Symbol("TRANSACT");
 
-/** @typedef {(String|Symbol)} Subject */
+/** @typedef {(string|symbol)} Subject */
 
 /**
- * @typedef {Object} Actions
- * @property {String} insert
- * @property {String} delete
- * @property {String} update
+ * @typedef {object} Actions
+ * @property {string} insert
+ * @property {string} delete
+ * @property {string} update
  */
 
 /**
- * @typedef {Object} Transaction
- * @property {Number} index
+ * @typedef {object} Transaction
+ * @property {number} index
  * @property {Actions} action
  * @property {Subject} subject
- * @property {Number} openAt Transaction Creation timestamp
+ * @property {number} openAt Transaction Creation timestamp
  * @property {any} attachData
  * @property {any[]} data
  */
 
 /**
  * @class TransactManager
- * @extends EventEmitter
+ * @augments EventEmitter
  *
  * @property {*} db SQLite DB ref
- * @property {Number} timer Interval Timer ID
- * @property {Map<String, Actions>} subjects
- * @property {Map<String, Transaction>} transactions
+ * @property {number} timer Interval Timer ID
+ * @property {Map<string, Actions>} subjects
+ * @property {Map<string, Transaction>} transactions
  */
 class TransactManager extends EventEmitter {
     /**
-     * @constructor
+     * @class
      * @param {*} db SQLite db
-     * @param {Object} [options] options object
-     * @param {Number} [options.interval=5000] Transaction Interval
-     * @param {Boolean} [options.verbose=false] Enable verbose mode
+     * @param {object} [options] options object
+     * @param {number} [options.interval=5000] Transaction Interval
+     * @param {boolean} [options.verbose=false] Enable verbose mode
      */
     constructor(db, options = Object.create(null)) {
         super();
         this.db = db;
         this.verbose = typeof options.verbose === "boolean" ? options.verbose : false;
 
-        /** @type {Map<String, Actions>} */
+        /** @type {Map<string, Actions>} */
         this.subjects = new Map();
 
-        /** @type {Map<String, Transaction>} */
+        /** @type {Map<string, Transaction>} */
         this.transactions = new Map();
 
         // Set non-enumerable TRANSACT property
@@ -68,7 +70,7 @@ class TransactManager extends EventEmitter {
         // Create the Transaction interval
         const intervalMs = typeof options.interval === "number" ? options.interval : DEFAULT_INTERVAL_MS;
         this.timer = timer.setInterval(async() => {
-            /** @type {String[]} */
+            /** @type {string[]} */
             const qtArr = this[TRANSACT];
             if (this.verbose) {
                 console.log(`Run transaction with ${qtArr.length} element!`);
@@ -93,8 +95,9 @@ class TransactManager extends EventEmitter {
     }
 
     /**
-     * @property {Number} size
-     * @desc Size of open transactions
+     * @function size
+     * @description Size of open transactions
+     * @returns {number}
      */
     get size() {
         return this.transactions.size;
@@ -104,10 +107,10 @@ class TransactManager extends EventEmitter {
      * @version 0.1.0
      *
      * @async
-     * @method loadSubjectsFromFile
-     * @desc Load subjects from a .JSON file
+     * @function loadSubjectsFromFile
+     * @description Load subjects from a .JSON file
      * @memberof TransactManager#
-     * @param {!String} fileLocation file location on the local disk
+     * @param {!string} fileLocation file location on the local disk
      * @returns {Promise<void>}
      *
      * @throws {TypeError}
@@ -132,8 +135,8 @@ class TransactManager extends EventEmitter {
     /**
      * @version 0.1.0
      *
-     * @method registerSubject
-     * @desc Add a new transaction subject
+     * @function registerSubject
+     * @description Add a new transaction subject
      * @memberof TransactManager#
      * @param {!Subject} name subject name
      * @param {!Actions} actions available actions for the given subject
@@ -163,12 +166,12 @@ class TransactManager extends EventEmitter {
     /**
      * @version 0.1.0
      *
-     * @method open
+     * @function open
      * @memberof TransactManager#
-     * @param {!String} action action name
+     * @param {!string} action action name
      * @param {!Subject} subject subject
      * @param {any[]} data data to be publish
-     * @returns {String}
+     * @returns {string}
      *
      * @throws {Error}
      */
@@ -202,12 +205,12 @@ class TransactManager extends EventEmitter {
     /**
      * @version 0.1.0
      *
-     * @method attachData
-     * @desc Attach a payload to a given transaction
+     * @function attachData
+     * @description Attach a payload to a given transaction
      * @memberof TransactManager#
-     * @param {!String} transactId transaction id
+     * @param {!string} transactId transaction id
      * @param {*} data custom data to attach to the transaction
-     * @returns {Boolean}
+     * @returns {boolean}
      */
     attachData(transactId, data) {
         if (!this.transactions.has(transactId)) {
@@ -223,11 +226,11 @@ class TransactManager extends EventEmitter {
     /**
      * @version 0.1.0
      *
-     * @method close
-     * @desc Close a given transaction by ID
+     * @function close
+     * @description Close a given transaction by ID
      * @memberof TransactManager#
-     * @param {!String} transactId transaction id
-     * @returns {Boolean}
+     * @param {!string} transactId transaction id
+     * @returns {boolean}
      *
      * @throws {Error}
      */
@@ -243,8 +246,8 @@ class TransactManager extends EventEmitter {
     }
 
     /**
-     * @method exit
-     * @desc Exit and liberate all ressources of the TransactionManager (timer etc..)
+     * @function exit
+     * @description Exit and liberate all ressources of the TransactionManager (timer etc..)
      * @memberof TransactManager#
      * @returns {void}
      */
@@ -258,10 +261,10 @@ class TransactManager extends EventEmitter {
  * @static
  * @readonly
  * @memberof TransactManager#
- * @type {Object}
- * @property {String} Insert
- * @property {String} Update
- * @property {String} Delete
+ * @type {object}
+ * @property {string} Insert
+ * @property {string} Update
+ * @property {string} Delete
  */
 TransactManager.Actions = Object.freeze({
     Insert: "insert",

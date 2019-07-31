@@ -1,3 +1,5 @@
+"use strict";
+
 // Require Node.js Dependencies
 const { join } = require("path");
 const { unlink, readFile } = require("fs").promises;
@@ -8,7 +10,7 @@ const sqlite = require("sqlite");
 const is = require("@slimio/is");
 
 /**
- * @typedef {Object} SQLDef
+ * @typedef {object} SQLDef
  * @property {[string, string]} user
  */
 
