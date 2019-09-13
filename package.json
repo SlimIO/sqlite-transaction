@@ -41,7 +41,7 @@
         "@escommunity/minami": "^1.0.0",
         "@slimio/eslint-config": "^3.0.2",
         "@slimio/is": "^1.5.1",
-        "@slimio/psp": "^0.6.0",
+        "@slimio/psp": "^0.8.0",
         "@types/node": "^12.7.5",
         "cross-env": "^5.2.1",
         "eslint": "^6.1.0",
