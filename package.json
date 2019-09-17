@@ -43,7 +43,7 @@
         "@slimio/is": "^1.5.1",
         "@slimio/psp": "^0.8.0",
         "@types/node": "^12.7.5",
-        "cross-env": "^5.2.1",
+        "cross-env": "^6.0.0",
         "eslint": "^6.1.0",
         "husky": "^3.0.2",
         "japa": "^3.0.1",
