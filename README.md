@@ -10,7 +10,7 @@
 SQLite transaction manager for SlimIO events addon. Designed to work with the [sqlite](https://github.com/kriasoft/node-sqlite#readme) npm package.
 
 ## Requirements
-- [Node.js](https://nodejs.org/en/) v10 or higher
+- [Node.js](https://nodejs.org/en/) v12 or higher
 
 ## Getting Started
 
