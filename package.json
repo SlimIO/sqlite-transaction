@@ -1,6 +1,6 @@
 {
     "name": "@slimio/sqlite-transaction",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "SQLite transaction manager for SlimIO events addon",
     "main": "index.js",
     "scripts": {
