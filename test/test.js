@@ -7,6 +7,7 @@ const { unlink, readFile } = require("fs").promises;
 // Require Third-party Dependencies
 const test = require("japa");
 const sqlite = require("sqlite");
+const sqlite3 = require("sqlite3");
 const is = require("@slimio/is");
 
 /**
@@ -26,7 +27,10 @@ test.group("SQLite-transaction", (group) => {
 
     group.before(async() => {
         const sql = await readFile(join(__dirname, "db.sql"), { encoding: "utf8" });
-        db = await sqlite.open(DB);
+        db = await sqlite.open({
+            filename: DB,
+            driver: sqlite3.Database
+        });
         await db.exec(sql);
     });
 
