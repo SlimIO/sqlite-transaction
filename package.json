@@ -1,63 +1,67 @@
 {
-    "name": "@slimio/sqlite-transaction",
-    "version": "0.2.0",
-    "description": "SQLite transaction manager for SlimIO events addon",
-    "main": "index.js",
-    "scripts": {
-        "prepublishOnly": "pkg-ok",
-        "test": "cross-env psp && node test/test.js",
-        "doc": "jsdoc -c ./jsdoc.json -r -R ./README.md -P ./package.json --verbose",
-        "coverage": "nyc npm test",
-        "report": "nyc report --reporter=html"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/SlimIO/sqlite-transaction.git"
-    },
-    "keywords": [
-        "SlimIO",
-        "sqlite",
-        "transaction",
-        "manager",
-        "handler"
-    ],
-    "files": [
-        "index.js",
-        "index.d.ts"
-    ],
-    "author": "SlimIO",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/SlimIO/sqlite-transaction/issues"
-    },
-    "homepage": "https://github.com/SlimIO/sqlite-transaction#readme",
-    "dependencies": {
-        "@slimio/timer": "^1.0.2"
-    },
-    "devDependencies": {
-        "@commitlint/cli": "^8.3.5",
-        "@commitlint/config-conventional": "^8.3.4",
-        "@escommunity/minami": "^1.0.0",
-        "@slimio/eslint-config": "^4.1.0",
-        "@slimio/is": "^1.5.1",
-        "@slimio/psp": "^0.11.1",
-        "@types/node": "^14.0.1",
-        "cross-env": "^7.0.2",
-        "eslint": "^7.0.0",
-        "husky": "^4.2.5",
-        "japa": "^3.0.1",
-        "jsdoc": "^3.6.4",
-        "pkg-ok": "^2.3.1",
-        "sqlite": "^4.0.7",
-        "sqlite3": "^4.2.0"
-    },
-    "engines": {
-        "node": ">=12"
-    },
-    "husky": {
-        "hooks": {
-            "pre-push": "cross-env eslint index.js && npm test",
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-        }
+  "name": "@slimio/sqlite-transaction",
+  "version": "0.2.0",
+  "description": "SQLite transaction manager for SlimIO events addon",
+  "main": "index.js",
+  "scripts": {
+    "prepublishOnly": "pkg-ok",
+    "test": "cross-env psp && node test/test.js",
+    "doc": "jsdoc -c ./jsdoc.json -r -R ./README.md -P ./package.json --verbose",
+    "coverage": "nyc npm test",
+    "report": "nyc report --reporter=html",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SlimIO/sqlite-transaction.git"
+  },
+  "keywords": [
+    "SlimIO",
+    "sqlite",
+    "transaction",
+    "manager",
+    "handler"
+  ],
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "author": "SlimIO",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SlimIO/sqlite-transaction/issues"
+  },
+  "homepage": "https://github.com/SlimIO/sqlite-transaction#readme",
+  "dependencies": {
+    "@slimio/timer": "^1.0.2",
+    "snyk": "^1.321.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@escommunity/minami": "^1.0.0",
+    "@slimio/eslint-config": "^4.1.0",
+    "@slimio/is": "^1.5.1",
+    "@slimio/psp": "^0.11.1",
+    "@types/node": "^14.0.1",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.0.0",
+    "husky": "^4.2.5",
+    "japa": "^3.0.1",
+    "jsdoc": "^3.6.4",
+    "pkg-ok": "^2.3.1",
+    "sqlite": "^4.0.7",
+    "sqlite3": "^4.2.0"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "cross-env eslint index.js && npm test",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "snyk": true
 }
