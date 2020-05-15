@@ -6,7 +6,6 @@
 ![size](https://img.shields.io/github/repo-size/SlimIO/sqlite-transaction.svg)
 [![Known Vulnerabilities](https://snyk.io/test/github/SlimIO/sqlite-transaction/badge.svg?targetFile=package.json)](https://snyk.io/test/github/SlimIO/sqlite-transaction?targetFile=package.json)
 [![Build Status](https://travis-ci.com/SlimIO/sqlite-transaction.svg?branch=master)](https://travis-ci.com/SlimIO/sqlite-transaction)
-[![Greenkeeper badge](https://badges.greenkeeper.io/SlimIO/sqlite-transaction.svg)](https://greenkeeper.io/)
 
 SQLite transaction manager for SlimIO events addon. Designed to work with the [sqlite](https://github.com/kriasoft/node-sqlite#readme) npm package.
 
